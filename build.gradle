@@ -3,14 +3,17 @@ apply from: "$project.rootDir/spotless.gradle"
 buildscript {
   ext {
     spotlessVersion = "3.27.2"
+    forgeGradleVersion = "3.+"
   }
   repositories {
-    maven { url = 'https://files.minecraftforge.net/maven' }
+    maven {
+      url = 'https://files.minecraftforge.net/maven'
+    }
     jcenter()
-      mavenCentral()
+    mavenCentral()
   }
   dependencies {
-    classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+    classpath "net.minecraftforge.gradle:ForgeGradle:$forgeGradleVersion"
     classpath "com.diffplug.spotless:spotless-plugin-gradle:$spotlessVersion"
   }
 }
@@ -19,61 +22,46 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 
 version = "${mod_version}-${mod_build}"
-group = "${mod_group}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "${mod_group}"
 archivesBaseName = "${mod_name}"
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+sourceCompatibility =
+    targetCompatibility =
+    compileJava.sourceCompatibility =
+    compileJava.targetCompatibility = '1.8'
 
 minecraft {
   mappings channel: 'snapshot', version: "${forge_mappings}"
-
   runs {
     client {
       workingDirectory project.file('run')
-
-        // Recommended logging data for a userdev environment
-        property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-        // Recommended logging level for the console
-        property 'forge.logging.console.level', 'debug'
-
-        mods {
-          nanomachines {
-            source sourceSets.main
-          }
+      property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+      property 'forge.logging.console.level', 'debug'
+      mods {
+        nanomachines {
+          source sourceSets.main
         }
+      }
     }
-
     server {
       workingDirectory project.file('run')
-
-        // Recommended logging data for a userdev environment
-        property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-        // Recommended logging level for the console
-        property 'forge.logging.console.level', 'debug'
-
-        mods {
-          nanomachines {
-            source sourceSets.main
-          }
+      property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+      property 'forge.logging.console.level', 'debug'
+      mods {
+        nanomachines {
+          source sourceSets.main
         }
+      }
     }
-
     data {
       workingDirectory project.file('run')
-
-        // Recommended logging data for a userdev environment
-        property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-        // Recommended logging level for the console
-        property 'forge.logging.console.level', 'debug'
-
-        mods {
-          nanomachines {
-            source sourceSets.main
-          }
+      property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+      property 'forge.logging.console.level', 'debug'
+      mods {
+        nanomachines {
+          source sourceSets.main
         }
+      }
       args '--mod', 'nanomachines', '--all',
            '--existing', '"' + file('src/main/resources/') + '"',
            '--existing', '"' + file('src/generated/resources/') + '"',
