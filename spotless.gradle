@@ -1,0 +1,38 @@
+apply plugin: "com.diffplug.gradle.spotless"
+
+spotless {
+  java {
+    target fileTree(projectDir) {
+      include '**/*.java'
+    }
+    googleJavaFormat('1.7')
+    removeUnusedImports()
+    trimTrailingWhitespace()
+    indentWithSpaces(2)
+    endWithNewline()
+  }
+  format 'misc', {
+    target fileTree(projectDir) {
+      include '**/.editorconfig'
+      include '**/.gitignore'
+      include '**/*.gradle'
+      include '**/*.json'
+      include '**/*.mcmeta'
+      include '**/*.md'
+      include '**/.properties'
+      include '**/*.toml'
+      include '**/*.xml'
+      exclude 'run/*'
+      exclude 'build/*'
+      exclude '.gradle/'
+    }
+    indentWithSpaces(2)
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+  format 'markdown', {
+    target '**/*.md'
+    indentWithSpaces(2)
+    endWithNewline()
+  }
+}

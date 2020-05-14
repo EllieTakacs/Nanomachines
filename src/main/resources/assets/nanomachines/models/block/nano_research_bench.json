@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "nanomachines:block/block_nano_research_bench"
+  }
+}

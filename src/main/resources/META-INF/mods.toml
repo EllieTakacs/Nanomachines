@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+displayURL="https://github.com/ellietakacs/nanomachines/"
+authors="Eleonóra Alíz Takács"
+
+[[mods]]
+  modId="nanomachines"
+  version="${file.jarVersion}"
+  displayName="Nanomachines"
+  description='''
+  Nanomachines, son'''
+
+[[dependencies.nanomachines]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.nanomachines]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15,)"
+    ordering="NONE"
+    side="BOTH"
